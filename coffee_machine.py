@@ -5,7 +5,7 @@ class CoffeeMachine:
         self.milk = 1000
         self.cups = 50
 
-    # This method returns True 
+    # This method returns True
     # if all variables are equal to corresponding numbers.
     # It's like logical expression.
     def is_full(self):
@@ -16,9 +16,8 @@ class CoffeeMachine:
             and self.cups == 50
         )
 
-    
     def fill(self):
-        # If the machine is full (is_full() returns True), 
+        # If the machine is full (is_full() returns True),
         # then we will see this message.
         if self.is_full():
             print("The machine is already full!")
@@ -29,9 +28,16 @@ class CoffeeMachine:
             self.cups = 50
             print("Machine refilled.")
 
-    
+    def check_ingredients(self):
+        print(f"The machine currently has\n \
+            {self.beans}\\300 beans,\n \
+            {self.water}\\2000 water,\n \
+            {self.milk}\\1000 milk, and\n \
+            {self.cups}\\50 cups." 
+        )
+
     def can_brew(self, drink):
-        # This method returns True 
+        # This method returns True
         # if the machine can brew drink of your choice.
         return (
             self.beans >= drink["beans"]
@@ -40,7 +46,6 @@ class CoffeeMachine:
             and self.cups > 0
         )
 
-    
     def brew(self, drink):
         if self.can_brew(drink):
             print("Brewing...")
