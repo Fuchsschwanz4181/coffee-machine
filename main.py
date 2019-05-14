@@ -1,17 +1,26 @@
 from coffee_machine import CoffeeMachine
-from drinks import drinks
+
 
 def print_menu():
-    print("1. Make espresso.")
-    print("2. Make latte.")
-    print("3. Make cappucino.")
-    print("4. Check ingredients.")
-    print("5. Refill machine.")
-    print("6. Exit.")
+
+    options = ["Check ingredients level.", "Refill machine.", "Exit."]
+
+    for i in range(len(CoffeeMachine.available_drinks)):
+        print(f"{i + 1}. Make {CoffeeMachine.available_drinks[i].name}.")
+
+    for i, option in enumerate(options,
+                               len(CoffeeMachine.available_drinks) + 1):
+        print(f"{i}. {option}")
+
 
 def main():
 
     machine = CoffeeMachine()
+
+    machine.add_drink("espresso", 20, 30, 0)
+    machine.add_drink("latte", 30, 180, 120)
+    machine.add_drink("cappucino", 15, 120, 180)
+    machine.add_drink("super strong coffee", 70, 180, 30)
 
     while True:
         print_menu()
@@ -21,31 +30,28 @@ def main():
         try:
             choice = int(action)
 
-            if choice in range(1, 7):
-                if choice == 1:
-                    print(machine.brew(drinks.get('espresso')))
-                    input("Press any key to continue...")
-                elif choice == 2:
-                    print(machine.brew(drinks.get('latte')))
-                    input("Press any key to continue...")
-                elif choice == 3:
-                    print(machine.brew(drinks.get('cappucino')))
-                    input("Press any key to continue...")
-                elif choice == 4:
-                    machine.check_ingredients()
-                    input("Press any key to continue...")
-                elif choice == 5:
-                    machine.fill()
-                    input("Press any key to continue...")
-                elif choice == 6:
-                    print("Goodbye!")
+            for i in range(len(CoffeeMachine.available_drinks)):
+                if choice == i + 1:
+                    print(machine.brew(machine.available_drinks[i]))
                     input("Press any key to continue...")
                     break
+
+            if choice == len(CoffeeMachine.available_drinks) + 1:
+                machine.show_ingredients_lvl()
+                input("Press any key to continue...")
+            elif choice == len(CoffeeMachine.available_drinks) + 2:
+                machine.fill()
+                input("Press any key to continue...")
+            elif choice == len(CoffeeMachine.available_drinks) + 3:
+                print("Goodbye!")
+                input("Press any key to continue...")
+                break
             else:
-                print("Please try again.")
+                print("Please input correct number.")
 
         except ValueError:
-            print("Please try again.")
+            print("Please input a number.")
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
     main()
