@@ -2,6 +2,14 @@ from coffee_machine import CoffeeMachine
 
 
 def print_menu():
+    """
+    This function is for printing menu.
+
+    Now it will print correct menu and options regardless
+    of the number of drinks.
+    It prints all "Make drink" positions, then everything
+    from "options" list.
+    """
 
     options = ["Check ingredients level.", "Refill machine.", "Exit."]
 
@@ -30,13 +38,14 @@ def main():
         try:
             choice = int(action)
 
-            for i in range(len(CoffeeMachine.available_drinks)):
-                if choice == i + 1:
-                    print(machine.brew(machine.available_drinks[i]))
-                    input("Press any key to continue...")
-                    break
+        except ValueError:
+            print("Please input a number.")
 
-            if choice == len(CoffeeMachine.available_drinks) + 1:
+        else:
+            if 0 < choice <= len(CoffeeMachine.available_drinks):
+                print(machine.brew(machine.available_drinks[choice - 1]))
+                input("Press any key to continue...")
+            elif choice == len(CoffeeMachine.available_drinks) + 1:
                 machine.show_ingredients_lvl()
                 input("Press any key to continue...")
             elif choice == len(CoffeeMachine.available_drinks) + 2:
@@ -48,9 +57,6 @@ def main():
                 break
             else:
                 print("Please input correct number.")
-
-        except ValueError:
-            print("Please input a number.")
 
 
 if __name__ == '__main__':

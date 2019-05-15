@@ -21,6 +21,7 @@ class CoffeeMachine:
 
         Method creates an Drinks class object and adds it to the list.
         """
+
         self.available_drinks.append(Drinks(drink_name,
                                             beans_cost,
                                             water_cost,
@@ -40,7 +41,7 @@ class CoffeeMachine:
         self.water = self.WATER_AMOUNT
         self.milk = self.MILK_AMOUNT
         self.cups = self.CUPS_AMOUNT
-        return "Machine refilled."
+        print("Machine refilled.")
 
     def show_ingredients_lvl(self):
         """This method shows amount of ingredients in the machine."""

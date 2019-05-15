@@ -29,20 +29,31 @@ class TestCoffeeMachine(unittest.TestCase):
 
     def test_brewing(self):
         tested = [
-            self.testMachine.brew(self.testMachine.available_drinks[0]),
-            self.testMachine.brew(self.testMachine.available_drinks[1])
+            self.testMachine.brew(self.testMachine.available_drinks[1]),
+            self.testMachine.brew(self.testMachine.available_drinks[0])
         ]
 
         expected = [
-            "Beep beep! Your {} is ready!"
-                .format(self.testMachine.available_drinks[0].name),
-            "Not enough ingredients. Refill the machine!"
+
         ]
         self.assertEqual(tested, expected, "Error while brewing a drink!")
 
     def test_filling(self):
-        self.assertEqual(self.testMachine.fill(), "Machine refilled.",
-                         "Error while refilling the machine!")
+        tested = [
+            self.testMachine.beans,
+            self.testMachine.water,
+            self.testMachine.milk,
+            self.testMachine.cups
+        ]
+
+        expected = [
+            CoffeeMachine.COFFEE_BEANS,
+            CoffeeMachine.WATER_AMOUNT,
+            CoffeeMachine.MILK_AMOUNT,
+            CoffeeMachine.CUPS_AMOUNT
+        ]
+
+        self.assertEqual(tested, expected, "Machine wasn't filled!")
 
 
 if __name__ == '__main__':
